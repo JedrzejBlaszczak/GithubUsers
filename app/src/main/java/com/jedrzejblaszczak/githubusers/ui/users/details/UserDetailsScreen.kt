@@ -19,17 +19,19 @@ import com.jedrzejblaszczak.githubusers.ui.users.UsersViewModel
 
 @Composable
 fun UserDetailsScreen(userId: Int, viewModel: UsersViewModel) {
-//    val user = viewModel.users.collectAsState().value.find { it.id == userId }
-//    user?.let {
-//        Column(modifier = Modifier.padding(16.dp)) {
-//            Image(
-//                painter = rememberAsyncImagePainter(it.avatarUrl),
-//                contentDescription = null,
-//                modifier = Modifier.size(100.dp).clip(CircleShape)
-//            )
-//            Spacer(modifier = Modifier.height(16.dp))
-//            Text(text = it.login, style = MaterialTheme.typography.bodyMedium)
-//            Text(text = it.url, style = MaterialTheme.typography.headlineMedium)
-//        }
-//    } ?: Text("User not found")
+    val user = viewModel.users.collectAsState().value.find { it.id == userId }
+    user?.let {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Image(
+                painter = rememberAsyncImagePainter(it.avatar_url),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(100.dp)
+                    .clip(CircleShape)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(text = it.login, style = MaterialTheme.typography.bodyMedium)
+            Text(text = it.url, style = MaterialTheme.typography.headlineMedium)
+        }
+    } ?: Text("User not found")
 }
