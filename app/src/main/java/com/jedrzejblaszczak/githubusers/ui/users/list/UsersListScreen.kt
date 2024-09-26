@@ -53,8 +53,8 @@ fun UserItem(user: UserModel, onClick: () -> Unit) {
         )
         Spacer(modifier = Modifier.width(16.dp))
         Column {
-            Text(text = user.login, style = MaterialTheme.typography.bodyMedium)
-            Text(text = user.url, style = MaterialTheme.typography.headlineMedium)
+            Text(text = user.login, style = MaterialTheme.typography.headlineMedium)
+            Text(text = user.url, style = MaterialTheme.typography.bodySmall)
         }
     }
 }
