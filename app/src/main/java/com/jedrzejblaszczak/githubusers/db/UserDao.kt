@@ -14,6 +14,6 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUsers(users: List<UserModel>)
 
-    @Query("SELECT * FROM users WHERE login LIKE :query")
+    @Query("SELECT * FROM users WHERE login LIKE '%' || :query || '%'")
     suspend fun searchUsers(query: String): List<UserModel>
 }

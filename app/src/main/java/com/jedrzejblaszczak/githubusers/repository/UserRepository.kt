@@ -23,4 +23,9 @@ class UserRepository(
             Log.e(UserRepository::class.simpleName, "getUsers failed: ${e.message}")
         }
     }.flowOn(Dispatchers.IO)
+
+    fun searchUsers(query: String): Flow<List<UserModel>> = flow {
+        emit(userDao.searchUsers(query))
+    }.flowOn(Dispatchers.IO)
+
 }

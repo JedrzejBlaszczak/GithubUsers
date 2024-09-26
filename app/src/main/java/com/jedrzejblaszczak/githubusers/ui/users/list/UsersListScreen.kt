@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -13,6 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,12 +29,25 @@ import com.jedrzejblaszczak.githubusers.ui.users.UsersViewModel
 
 @Composable
 fun UsersListScreen(navController: NavController, usersViewModel: UsersViewModel) {
+    val searchQuery by usersViewModel.searchQuery.collectAsState()
     val users by usersViewModel.users.collectAsState()
 
-    LazyColumn {
-        items(users) { user ->
-            UserItem(user) {
-                navController.navigate("detail/${user.id}")
+    Column(modifier = Modifier.fillMaxSize()) {
+        // Search Bar
+        TextField(
+            value = searchQuery,
+            onValueChange = { query -> usersViewModel.updateSearchQuery(query) },  // Update the query in ViewModel
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            placeholder = { Text("Search users...") }
+        )
+
+        LazyColumn {
+            items(users) { user ->
+                UserItem(user) {
+                    navController.navigate("detail/${user.id}")
+                }
             }
         }
     }
