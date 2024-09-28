@@ -5,14 +5,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.jedrzejblaszczak.githubusers.ui.users.details.UserDetailsScreen
-import com.jedrzejblaszczak.githubusers.ui.users.list.UsersListScreen
+import com.jedrzejblaszczak.githubusers.ui.users.list.UserListScreen
 
 @Composable
 fun AppNavGraph() {
     val navController = rememberNavController()
     NavHost(navController, startDestination = "main") {
         composable("main") {
-            UsersListScreen(navController)
+            UserListScreen(navController)
         }
         composable("detail/{userId}") { backStackEntry ->
             val userId = backStackEntry.arguments?.getString("userId")?.toInt() ?: 0

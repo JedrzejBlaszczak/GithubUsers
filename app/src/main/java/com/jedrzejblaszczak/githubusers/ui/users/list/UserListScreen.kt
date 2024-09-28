@@ -31,7 +31,7 @@ import com.jedrzejblaszczak.githubusers.R
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun UsersListScreen(navController: NavController) {
+fun UserListScreen(navController: NavController) {
     val viewModel = koinViewModel<UserListViewModel>()
     val searchQuery by viewModel.searchQuery.collectAsState()
     val users by viewModel.users.collectAsState()
