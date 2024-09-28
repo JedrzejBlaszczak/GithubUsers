@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -34,6 +35,7 @@ fun UsersListScreen(navController: NavController) {
     val viewModel = koinViewModel<UserListViewModel>()
     val searchQuery by viewModel.searchQuery.collectAsState()
     val users by viewModel.users.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
         TextField(
@@ -47,10 +49,14 @@ fun UsersListScreen(navController: NavController) {
             }
         )
 
-        LazyColumn {
-            items(users) { user ->
-                UserItem(user) {
-                    navController.navigate("detail/${user.id}")
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+        } else {
+            LazyColumn {
+                items(users) { user ->
+                    UserItem(user) {
+                        navController.navigate("detail/${user.id}")
+                    }
                 }
             }
         }
