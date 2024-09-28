@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0259886e59557b5cce626ff2e30979d2",
+    "identityHash": "c31e01f5e2249d0eebaf2bccd1f221dd",
     "entities": [
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `login` TEXT NOT NULL, `avatar_url` TEXT NOT NULL, `url` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `login` TEXT NOT NULL, `avatar_url` TEXT NOT NULL, `url` TEXT NOT NULL, `node_id` TEXT NOT NULL, `type` TEXT NOT NULL, `site_admin` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -31,6 +31,24 @@
             "columnName": "url",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "node_id",
+            "columnName": "node_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "site_admin",
+            "columnName": "site_admin",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -46,7 +64,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0259886e59557b5cce626ff2e30979d2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c31e01f5e2249d0eebaf2bccd1f221dd')"
     ]
   }
 }

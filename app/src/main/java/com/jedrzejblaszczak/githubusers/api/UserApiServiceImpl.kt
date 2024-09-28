@@ -1,6 +1,6 @@
 package com.jedrzejblaszczak.githubusers.api
 
-import com.jedrzejblaszczak.githubusers.data.UserModel
+import com.jedrzejblaszczak.githubusers.db.user.UserModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

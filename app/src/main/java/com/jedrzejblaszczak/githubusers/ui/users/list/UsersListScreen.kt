@@ -19,28 +19,32 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.jedrzejblaszczak.githubusers.data.UserModel
-import com.jedrzejblaszczak.githubusers.ui.users.UsersViewModel
+import com.jedrzejblaszczak.githubusers.R
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun UsersListScreen(navController: NavController, usersViewModel: UsersViewModel) {
-    val searchQuery by usersViewModel.searchQuery.collectAsState()
-    val users by usersViewModel.users.collectAsState()
+fun UsersListScreen(navController: NavController) {
+    val viewModel = koinViewModel<UserListViewModel>()
+    val searchQuery by viewModel.searchQuery.collectAsState()
+    val users by viewModel.users.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        // Search Bar
         TextField(
             value = searchQuery,
-            onValueChange = { query -> usersViewModel.updateSearchQuery(query) },  // Update the query in ViewModel
+            onValueChange = { query -> viewModel.updateSearchQuery(query) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            placeholder = { Text("Search users...") }
+            placeholder = {
+                Text(text = stringResource(id = R.string.user_listScreen_searchBoxPlaceholder))
+            }
         )
 
         LazyColumn {
@@ -54,23 +58,21 @@ fun UsersListScreen(navController: NavController, usersViewModel: UsersViewModel
 }
 
 @Composable
-fun UserItem(user: UserModel, onClick: () -> Unit) {
+fun UserItem(user: UserListModel, onClick: () -> Unit) {
     Row(
+        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(16.dp)
             .clickable(onClick = onClick),
     ) {
         Image(
-            painter = rememberAsyncImagePainter(user.avatar_url),
+            painter = rememberAsyncImagePainter(user.avatarUrl),
             contentDescription = null,
             modifier = Modifier
                 .size(50.dp)
                 .clip(CircleShape),
         )
         Spacer(modifier = Modifier.width(16.dp))
-        Column {
-            Text(text = user.login, style = MaterialTheme.typography.headlineMedium)
-            Text(text = user.url, style = MaterialTheme.typography.bodySmall)
-        }
+        Text(text = user.login, style = MaterialTheme.typography.headlineMedium)
     }
 }

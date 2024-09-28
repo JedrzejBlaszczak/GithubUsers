@@ -29,13 +29,14 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-activity = { module = "androidx.activity:activity-compose" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
-compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compiler-compiler"}
+compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compiler-compiler" }
 compose-material = { module = "androidx.compose.material3:material3" }
 compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 compose-ui-test = { module = "androidx.compose.ui:ui-test" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }

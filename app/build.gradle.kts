@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.compose.navigation)
 
     implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
