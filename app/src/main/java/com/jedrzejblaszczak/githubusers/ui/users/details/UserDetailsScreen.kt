@@ -19,10 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.jedrzejblaszczak.githubusers.R
-import com.jedrzejblaszczak.githubusers.ui.users.list.UserListViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -44,15 +42,16 @@ fun UserDetailsScreen(userId: Int) {
         ) {
             Image(
                 painter = rememberAsyncImagePainter(it.avatarUrl),
-                contentDescription = null,
+                contentDescription = it.login,
                 modifier = Modifier
                     .size(100.dp)
                     .clip(CircleShape)
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = it.login, style = MaterialTheme.typography.headlineMedium)
+            Text(text = it.type, style = MaterialTheme.typography.bodyMedium)
             Text(text = it.url, style = MaterialTheme.typography.bodySmall)
-            Text(text = it.type, style = MaterialTheme.typography.bodySmall)
+
         }
     } ?: Text(text = stringResource(id = R.string.user_details_noUserError))
 }
